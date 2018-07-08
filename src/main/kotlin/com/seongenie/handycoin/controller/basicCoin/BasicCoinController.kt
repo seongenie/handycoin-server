@@ -17,9 +17,10 @@ class BasicCoinController {
     lateinit var basicCoinService : BasicCoinService
 
     @RequestMapping(value = "/create/{exchange}/{coin}", method = [RequestMethod.POST])
-    fun createFavorCoins(@PathVariable("exchange") exchange : String, @PathVariable("coin") coin : String) : BasicCoinView {
+    fun createFavorCoins(@PathVariable("exchange") exchange : String, @PathVariable("coin") coin : String)  {
         var coinView = BasicCoinView(exchange, coin)
-        return basicCoinService.createBasicCoin(coinView)
+        basicCoinService.createBasicCoin(coinView)
+//        return basicCoinService.createBasicCoin(coinView)
     }
 
     @RequestMapping(value = "/getBasicCoins", method = [RequestMethod.GET])

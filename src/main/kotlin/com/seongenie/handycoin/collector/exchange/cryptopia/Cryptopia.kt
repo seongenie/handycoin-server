@@ -7,16 +7,17 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import com.seongenie.handycoin.service.BasicCoinService
-import com.seongenie.handycoin.service.CoinPriceService
+//import com.seongenie.handycoin.service.CoinPriceService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
-object Cryptopia {
+@Component
+class Cryptopia {
 
     @Autowired
     lateinit var basicCoinService: BasicCoinService
-    @Autowired
-    lateinit var coinPriceService: CoinPriceService
+//    @Autowired
+//    lateinit var coinPriceService: CoinPriceService
     var retrofit : Retrofit? = null
     var apiService : RestAPIService? = null
 
@@ -54,29 +55,29 @@ object Cryptopia {
         })
     }
 
-    fun priceProcess() {
-        if(apiService == null) return
-        var request : Call<ResultView<Market>> = apiService!!.getMarkets()
-        request.enqueue(object : Callback<ResultView<Market>> {
-            override fun onFailure(call: Call<ResultView<Market>>?, t: Throwable) {
-                t.printStackTrace()
-            }
-
-            override fun onResponse(call: Call<ResultView<Market>>?, response: Response<ResultView<Market>>?) {
-                if (response?.body()?.success == true) {
-                    var marketList : List<Market>? = response.body()!!.data
-                    marketList?.forEach({
-                        if (it.label.split("/")[1].equals("BTC")) {
-                            try {
-                                coinPriceService.insertCoinPrice(it)
-                            } catch (e : Exception) {
-                                e.printStackTrace()
-                            }
-                        }
-                    })
-                }
-            }
-        })
-    }
+//    fun priceProcess() {
+//        if(apiService == null) return
+//        var request : Call<ResultView<Market>> = apiService!!.getMarkets()
+//        request.enqueue(object : Callback<ResultView<Market>> {
+//            override fun onFailure(call: Call<ResultView<Market>>?, t: Throwable) {
+//                t.printStackTrace()
+//            }
+//
+//            override fun onResponse(call: Call<ResultView<Market>>?, response: Response<ResultView<Market>>?) {
+//                if (response?.body()?.success == true) {
+//                    var marketList : List<Market>? = response.body()!!.data
+//                    marketList?.forEach({
+//                        if (it.label.split("/")[1].equals("BTC")) {
+//                            try {
+//                                coinPriceService.insertCoinPrice(it)
+//                            } catch (e : Exception) {
+//                                e.printStackTrace()
+//                            }
+//                        }
+//                    })
+//                }
+//            }
+//        })
+//    }
 
 }

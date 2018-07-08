@@ -1,18 +1,38 @@
 package com.seongenie.handycoin.domain
 
-import org.springframework.data.repository.query.Param;
-import org.springframework.data.jpa.repository.JpaRepository
-import org.springframework.data.jpa.repository.Query
+import com.seongenie.handycoin.domain.infra.BaiscRepository
 import org.springframework.stereotype.Repository
-import javax.persistence.Basic
-import kotlin.reflect.KClass
+import javax.persistence.TypedQuery
+import javax.persistence.criteria.CriteriaQuery
+import javax.persistence.criteria.Root
+
 
 @Repository
-interface BasicCoinRepository : JpaRepository<BasicCoin, Long> {
+class BasicCoinRepository : BaiscRepository() {
 
-    @Query("select o from BasicCoin o")
-    override fun findAll(): List<BasicCoin>
+    fun findBasicCoin(exchange : String, coin : String) : BasicCoin? {
+        var builder = getCriteria()
+        var query : CriteriaQuery<BasicCoin> = builder.createQuery(BasicCoin::class.java)
+        var root : Root<BasicCoin> = query.from(BasicCoin::class.java)
+        query.select(root)
+        var q : TypedQuery<BasicCoin> = getEntityManager().createQuery(query)
+        return q.resultList.get(0)
+    }
 
-    @Query("select o from BasicCoin o where exchange = :exchange and coin = :coin")
-    fun findBasicCoin(@Param("exchange") exchange: String, @Param("coin") coin: String): BasicCoin?
+    fun addBasicCoin(coin: BasicCoin) {
+        return getEntityManager().persist(coin)
+    }
+
+    fun findAll() : List<BasicCoin> {
+        var builder = getCriteria()
+        var query : CriteriaQuery<BasicCoin> = builder.createQuery(BasicCoin::class.java)
+        var root : Root<BasicCoin> = query.from(BasicCoin::class.java)
+        query.select(root)
+        var q : TypedQuery<BasicCoin> = getEntityManager().createQuery(query)
+        return q.resultList
+    }
+
+
+
+
 }
