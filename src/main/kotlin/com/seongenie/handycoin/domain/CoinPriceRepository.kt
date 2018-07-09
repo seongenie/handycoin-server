@@ -49,7 +49,7 @@ class CoinPriceRepository : BaiscRepository() {
     }
 
     fun insertCoinPriceOne(coinPrice: CoinPrice) {
-        addOne(coinPrice)
+        add(coinPrice)
     }
 
 

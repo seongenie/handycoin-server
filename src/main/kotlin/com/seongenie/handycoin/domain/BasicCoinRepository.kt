@@ -22,7 +22,8 @@ class BasicCoinRepository : BaiscRepository() {
     }
 
     fun addBasicCoin(coin: BasicCoin) {
-        return getEntityManager().persist(coin)
+        return add(coin)
+//        return getEntityManager().persist(coin)
     }
 
     fun findAll() : List<BasicCoin> {

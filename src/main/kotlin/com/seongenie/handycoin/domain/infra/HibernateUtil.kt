@@ -6,16 +6,15 @@ import org.springframework.stereotype.Component
 import org.hibernate.SessionFactory
 import javax.persistence.EntityManager
 import javax.persistence.EntityManagerFactory
+import javax.persistence.Persistence
 
 
 @Component
 class HibernateUtil {
-
     @Autowired
-    private var entityManagerFactory: EntityManagerFactory? = null
-    private var entityManager : EntityManager? = null
+    lateinit var entityManagerFactory: EntityManagerFactory
 
     fun getEntityManager() : EntityManager {
-        return if(entityManager != null) entityManager!! else entityManagerFactory!!.createEntityManager()
+        return entityManagerFactory.createEntityManager()
     }
 }

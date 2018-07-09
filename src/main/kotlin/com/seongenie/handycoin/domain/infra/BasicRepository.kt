@@ -6,6 +6,7 @@ import org.hibernate.Session
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 import javax.persistence.EntityManager
+import javax.persistence.EntityTransaction
 import javax.persistence.TypedQuery
 import javax.persistence.criteria.CriteriaBuilder
 import javax.persistence.criteria.CriteriaQuery
@@ -24,7 +25,12 @@ open class BaiscRepository {
         return hibernateUtil.getEntityManager()
     }
 
-    fun addOne(entity : Any?) {
-        hibernateUtil.getEntityManager().persist(entity)
+    fun add(entity : Any?) {
+        var em : EntityManager = hibernateUtil.getEntityManager()
+        var transaction : EntityTransaction = em.transaction
+        transaction.begin()
+        em.persist(entity)
+        transaction.commit()
+        em.close()
     }
 }

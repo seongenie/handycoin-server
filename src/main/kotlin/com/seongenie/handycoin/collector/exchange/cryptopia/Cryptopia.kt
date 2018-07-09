@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-object Cryptopia {
+class Cryptopia {
 
     @Autowired
     lateinit var basicCoinService: BasicCoinService
