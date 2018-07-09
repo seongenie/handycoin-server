@@ -5,19 +5,17 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.hibernate.SessionFactory
 import javax.persistence.EntityManager
+import javax.persistence.EntityManagerFactory
 
 
 @Component
 class HibernateUtil {
 
     @Autowired
-    private var entityManager: EntityManager? = null
-    var status = "-"
+    private var entityManagerFactory: EntityManagerFactory? = null
+    private var entityManager : EntityManager? = null
 
     fun getEntityManager() : EntityManager {
-        return entityManager!!
+        return if(entityManager != null) entityManager!! else entityManagerFactory!!.createEntityManager()
     }
-//    val session: Session @Throws(HibernateException::class) get() = entityManager.!!.openSession()
-//    val currentSession: Session @Throws(HibernateException::class) get() = sessionFactory!!.currentSession
-
 }

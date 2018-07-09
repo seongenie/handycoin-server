@@ -20,9 +20,10 @@ fun main(args: Array<String>) {
     var context : ConfigurableApplicationContext = SpringApplication.run(HandycoinApplication::class.java, *args)
 //    Cryptopia(context.getBean(BasicCoinService::class.java))
 
-//    context.getBean(Cryptopia::class.java).buildApiService().apply {
+    context.getBean(Cryptopia::class.java).buildApiService().apply {
 //        marketProcess()
-//    }
+        priceProcess()
+    }
 
 
 

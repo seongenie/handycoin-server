@@ -6,7 +6,9 @@ import com.seongenie.handycoin.domain.BasicCoinRepository
 import com.seongenie.handycoin.domain.infra.BasicService
 import org.springframework.beans.BeanUtils
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Service
 
+@Service
 class BasicCoinService : BasicService {
 
     @Autowired
