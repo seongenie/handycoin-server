@@ -24,13 +24,13 @@ class BaseCoinService : BaseService() {
     fun getBaseCoinList() : ExchangeCoinResponse {
         var result = ExchangeCoinResponse()
         var baseCoinList : List<BaseCoin> = repository.findAll()
-        baseCoinList.forEach { baseCoin -> (
+        baseCoinList.forEach { baseCoin ->
             if(result.data.containsKey(baseCoin.exchange)) {
                 result.data.get(baseCoin.exchange)?.add(baseCoin.coin)
             } else {
                 result.data.put(baseCoin.exchange, arrayListOf(baseCoin.coin))
             }
-        )}
+        }
         return result
     }
 

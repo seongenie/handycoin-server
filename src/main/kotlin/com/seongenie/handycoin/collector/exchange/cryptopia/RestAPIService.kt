@@ -10,6 +10,3 @@ interface RestAPIService {
     @GET("GetCurrencies")
     fun getCurrencies() : Call<ResultView<Currency>>
 }
-
-
-//https://www.cryptopia.co.nz/api/GetMarkets

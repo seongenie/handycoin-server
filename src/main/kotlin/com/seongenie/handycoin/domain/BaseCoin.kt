@@ -15,10 +15,12 @@ open class BaseCoin() : BaseEntity() {
     lateinit var coinNameEng : String
     lateinit var currency : String
 
-    constructor(exchange : String, coin : String, currency : String) : this() {
+    constructor(exchange : String, coin : String, currency : String, coinNameKor:String= "", coinNameEng: String = "") : this() {
         this.exchange = exchange
         this.coin = coin
         this.currency = currency
+        this.coinNameKor = coinNameKor
+        this.coinNameEng = coinNameEng
     }
 }
 

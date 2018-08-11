@@ -20,14 +20,6 @@ class BaseCoinController {
     @Autowired
     lateinit var upbit: Upbit
 
-
-//    @RequestMapping(value = "/create/{exchange}/{coin}", method = [RequestMethod.POST])
-//    fun createFavorCoins(@PathVariable("exchange") exchange : String, @PathVariable("coin") coin : String)  {
-//        var coinView = BaseCoinView(exchange, coin)
-//        baseCoinService.createBaseCoin(coinView)
-////        return basicCoinService.createBasicCoin(coinView)
-//    }
-
     @RequestMapping(value = "/getBaseCoins", method = [RequestMethod.GET])
     fun getBaseCoinList() : ExchangeCoinResponse {
         return baseCoinService.getBaseCoinList()
@@ -46,7 +38,6 @@ class BaseCoinController {
     @RequestMapping(value = "/upbit/ticker/collect", method = [RequestMethod.GET])
     fun collectUpbitTicker() {
         upbit.buildApiService().apply {
-            //        marketProcess()
             val baseCoinList : List<BaseCoin> = baseCoinService.getBaseCoins("UPBIT")
             val builder = StringBuilder()
             baseCoinList.forEach { it ->

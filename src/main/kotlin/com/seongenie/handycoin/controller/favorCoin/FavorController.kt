@@ -1,16 +1,14 @@
 package com.seongenie.handycoin.controller.favorCoin
 
 import com.seongenie.handycoin.domain.BaseCoin
+import com.seongenie.handycoin.domain.CoinTicker
 import com.seongenie.handycoin.service.CoinPriceService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestMethod
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 
 @RestController
-@RequestMapping("/favorCoin")
+@RequestMapping("/api/v1/favor")
 class FavorCntroller {
 
     @Autowired
@@ -22,8 +20,11 @@ class FavorCntroller {
         return coinPriceService.getCoinPrice(coin, currency)
     }
 
+
     @RequestMapping(value = "/getList", method = [RequestMethod.GET])
-    fun getFavorCoins() : List<FavorCoinView>{
-        return coinPriceService.getBaseCoinList()
+    fun getFavorCoins(@RequestParam("favor") favorMap : Map<String, List<String>>) : List<CoinTicker>{
+//        val map = HashMap<String, List<String>>()
+//        map.put("UPBIT", listOf("BTC", "ETH"))
+        return coinPriceService.getFavors(favorMap)
     }
 }

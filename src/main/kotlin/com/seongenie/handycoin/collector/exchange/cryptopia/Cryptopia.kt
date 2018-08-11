@@ -35,7 +35,7 @@ class Cryptopia {
         request.enqueue(CollectorModule.callbackWrapper({ response ->
             if(response?.body()?.success!!) {
                 var marketList : List<Market>? = response.body()!!.data
-                marketList?.forEach({
+                marketList?.forEach{
                     val splited = it.label.split("/")
                     if (splited[1].equals("BTC")) {
                         try {
@@ -44,9 +44,9 @@ class Cryptopia {
                             e.printStackTrace()
                         }
                     }
-                })
+                }
             }
-        }))
+        }, {t->t.printStackTrace()}))
     }
 
     fun priceProcess() {
@@ -55,7 +55,7 @@ class Cryptopia {
         request.enqueue(CollectorModule.callbackWrapper({ response ->
             if (response?.body()?.success!!) {
                 var marketList : List<Market>? = response.body()!!.data
-                marketList?.forEach({
+                marketList?.forEach{
                     if (it.label.split("/")[1].equals("BTC")) {
                         try {
                             coinPriceService.insertCoinPrice(it)
@@ -63,9 +63,9 @@ class Cryptopia {
                             e.printStackTrace()
                         }
                     }
-                })
+                }
             }
-        }))
+        }, {t->t.printStackTrace()}))
     }
 
 }

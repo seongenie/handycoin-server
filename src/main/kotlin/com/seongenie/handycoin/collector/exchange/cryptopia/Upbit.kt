@@ -41,7 +41,7 @@ class Upbit {
                     baseCoinService.createBaseCoin(BaseCoinView(exchange = "UPBIT", coin = currency[1], currency = currency[0]))
                 }
             }
-        }))
+        }, {t->t.printStackTrace()}))
     }
 
 
@@ -55,7 +55,7 @@ class Upbit {
                 coinPriceService.updateCoinPrice(it)
                 count++ }
             println("${count}개 업데이트")
-        }))
+        }, {t->t.printStackTrace()}))
     }
 
 

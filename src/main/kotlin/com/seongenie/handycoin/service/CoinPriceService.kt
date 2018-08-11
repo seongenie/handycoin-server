@@ -16,6 +16,7 @@ class CoinPriceService : BaseService() {
 
     @Autowired
     lateinit var coinPriceRepository : CoinPriceRepository
+
     @Autowired
     lateinit var baseCoinRepository : BaseCoinRepository
 
@@ -35,7 +36,7 @@ class CoinPriceService : BaseService() {
         val currency = splited[1]
         val baseCoin = baseCoinRepository.findBaseCoin(BaseCoin("CRYPTOPIA", coin, currency))
         var coinPrice = CoinTicker(baseCoin!!, lastPrice = market.lastPrice!!)
-        coinPriceRepository.insertCoinPriceOne(coinPrice)
+        coinPriceRepository.add(coinPrice)
     }
 
     fun updateCoinPrice(ticker : UpbitTicker) {
@@ -53,17 +54,25 @@ class CoinPriceService : BaseService() {
 
         var origin = coinPriceRepository.findCoinPrice(coinTicker)
         when(origin) {
-            null -> coinPriceRepository.insertCoinPriceOne(coinTicker)
+            null -> coinPriceRepository.add(coinTicker)
             else -> {
                 origin.volume = coinTicker.volume
                 origin.prevPrice = coinTicker.prevPrice
                 origin.lowPrice = coinTicker.lowPrice
                 origin.highPrice = coinTicker.highPrice
                 origin.lastPrice = coinTicker.lastPrice
-                coinPriceRepository.updateCoinPriceOne(origin)
+                coinPriceRepository.update(origin)
             }
         }
     }
 
 
+    fun getFavors(favorMap : Map<String, List<String>>) : List<CoinTicker> {
+        val favors : ArrayList<CoinTicker> = arrayListOf()
+        favorMap.forEach { it ->
+            val coinTickerList:  List<CoinTicker> = coinPriceRepository.findByExchangeCoins(it.key, it.value)
+            favors.addAll(coinTickerList)
+        }
+        return favors
+    }
 }

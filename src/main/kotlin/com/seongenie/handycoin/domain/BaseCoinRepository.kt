@@ -17,14 +17,12 @@ class BaseCoinRepository : BaseRepository() {
         var root : Root<BaseCoin> = query.from(BaseCoin::class.java)
         var predicate : Predicate = builder.and(builder.equal(root.get<String>("exchange"), baseCoin.exchange), builder.equal(root.get<String>("coin"), baseCoin.coin))
         query = query.select(root).where(predicate)
-//        var q : TypedQuery<BaseCoin> = getEntityManager().createQuery(query)
         var q : TypedQuery<BaseCoin> = entityManager.createQuery(query)
         return q.singleResult
     }
 
     fun addBaseCoin(coin: BaseCoin) {
         return add(coin)
-//        return getEntityManager().persist(coin)
     }
 
     fun findAll() : List<BaseCoin> {

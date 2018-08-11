@@ -1,14 +1,10 @@
 package com.seongenie.handycoin.domain
 
 import com.seongenie.handycoin.domain.infra.BaseRepository
-import com.seongenie.handycoin.domain.infra.HibernateUtil
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 import javax.persistence.TypedQuery
-import javax.persistence.criteria.CriteriaQuery
-import javax.persistence.criteria.Expression
-import javax.persistence.criteria.Predicate
-import javax.persistence.criteria.Root
+import javax.persistence.criteria.*
 
 @Repository
 class CoinPriceRepository : BaseRepository() {
@@ -46,11 +42,20 @@ class CoinPriceRepository : BaseRepository() {
         return q.resultList
     }
 
-    fun insertCoinPriceOne(coinTicker: CoinTicker) {
-        add(coinTicker)
-    }
 
-    fun updateCoinPriceOne(coinTicker: CoinTicker) {
-        update(coinTicker)
+    // join 해서 가져와야함
+    fun findByExchangeCoins(exchange: String, coins: List<String>) : List<CoinTicker> {
+        val builder = getCriteria()
+        val query : CriteriaQuery<CoinTicker> = builder.createQuery(CoinTicker::class.java)
+        val root : Root<CoinTicker> = query.from(CoinTicker::class.java)
+        val join: Join<CoinTicker, BaseCoin> = root.join("coin", JoinType.INNER)
+
+        val q = entityManager.createQuery(query.select(root).where(
+            builder.and(
+                builder.equal(join.get<String>("exchange"), exchange),
+                join.get<String>("coin").`in`(coins)
+            ))
+        )
+        return q.resultList
     }
 }
