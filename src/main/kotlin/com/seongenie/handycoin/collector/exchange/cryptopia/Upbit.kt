@@ -48,9 +48,13 @@ class Upbit {
     fun tickerProcess(markets : String) {
         if(apiService == null) return
         var request : Call<List<UpbitTicker>> = apiService!!.getTickers(markets)
+        var count = 0
         request.enqueue(CollectorModule.callbackWrapper({ response ->
             val ticker : List<UpbitTicker>? = response.body()
-            ticker?.forEach { it -> coinPriceService.updateCoinPrice(it) }
+            ticker?.forEach { it ->
+                coinPriceService.updateCoinPrice(it)
+                count++ }
+            println("${count}개 업데이트")
         }))
     }
 

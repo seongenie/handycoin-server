@@ -49,7 +49,7 @@ class CoinPriceService : BaseService() {
                 prevPrice = ticker.prevClosingPrice,
                 highPrice = ticker.highPrice,
                 lowPrice = ticker.lowPrice,
-                volume = ticker.tradeVolume )
+                volume = ticker.tradeVolume24h )
 
         var origin = coinPriceRepository.findCoinPrice(coinTicker)
         when(origin) {

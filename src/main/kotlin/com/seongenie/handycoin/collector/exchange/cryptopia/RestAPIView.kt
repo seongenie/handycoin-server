@@ -68,5 +68,7 @@ data class UpbitTicker (
         @SerializedName("signed_change_price") var signedChangePrice : Double,
         @SerializedName("signed_change_rate") var signedChangeRate : Double,
         @SerializedName("trade_volume") var tradeVolume : Double,
+        @SerializedName("acc_trade_volume") var tradeVolume24h : Double,
+        @SerializedName("acc_trade_price_24h") var tradePrice24h : Double,
         var currency : String
 )

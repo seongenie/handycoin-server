@@ -19,20 +19,20 @@ fun main(args: Array<String>) {
     var context : ConfigurableApplicationContext = SpringApplication.run(HandycoinApplication::class.java, *args)
 //    Cryptopia(context.getBean(BaseCoinService::class.java))
 
-    context.getBean(Upbit::class.java).buildApiService().apply {
-//        marketProcess()
-        val baseCoinService = context.getBean(BaseCoinService::class.java) as BaseCoinService
-        val baseCoinList : List<BaseCoin> = baseCoinService.getBaseCoins("UPBIT")
-
-        val builder = StringBuilder()
-        baseCoinList.forEach { it ->
-            builder.append(it.currency)
-            builder.append("-")
-            builder.append(it.coin)
-            builder.append(",")
-        }
-        builder.setLength(builder.length - 1)
-        var markets = builder.toString()
-        tickerProcess(markets)
-    }
+//    context.getBean(Upbit::class.java).buildApiService().apply {
+////        marketProcess()
+//        val baseCoinService = context.getBean(BaseCoinService::class.java) as BaseCoinService
+//        val baseCoinList : List<BaseCoin> = baseCoinService.getBaseCoins("UPBIT")
+//
+//        val builder = StringBuilder()
+//        baseCoinList.forEach { it ->
+//            builder.append(it.currency)
+//            builder.append("-")
+//            builder.append(it.coin)
+//            builder.append(",")
+//        }
+//        builder.setLength(builder.length - 1)
+//        var markets = builder.toString()
+//        tickerProcess(markets)
+//    }
 }
