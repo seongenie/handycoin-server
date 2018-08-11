@@ -1,22 +1,20 @@
 package com.seongenie.handycoin.collector.exchange.cryptopia
 
 import com.seongenie.handycoin.collector.infra.CollectorModule
-import com.seongenie.handycoin.controller.basicCoin.BasicCoinView
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import com.seongenie.handycoin.service.BasicCoinService
+import com.seongenie.handycoin.controller.baseCoin.BaseCoinView
+import com.seongenie.handycoin.service.BaseCoinService
 import com.seongenie.handycoin.service.CoinPriceService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
+import retrofit2.Call
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 @Component
 class Cryptopia {
 
     @Autowired
-    lateinit var basicCoinService: BasicCoinService
+    lateinit var baseCoinService: BaseCoinService
     @Autowired
     lateinit var coinPriceService: CoinPriceService
     var retrofit : Retrofit? = null
@@ -38,9 +36,10 @@ class Cryptopia {
             if(response?.body()?.success!!) {
                 var marketList : List<Market>? = response.body()!!.data
                 marketList?.forEach({
-                    if (it.label.split("/")[1].equals("BTC")) {
+                    val splited = it.label.split("/")
+                    if (splited[1].equals("BTC")) {
                         try {
-                            basicCoinService.createBasicCoin(BasicCoinView("CRYPTOPIA", it.label.split("/")[0]))
+                            baseCoinService.createBaseCoin(BaseCoinView("CRYPTOPIA", splited[0], splited[1]))
                         } catch (e : Exception) {
                             e.printStackTrace()
                         }

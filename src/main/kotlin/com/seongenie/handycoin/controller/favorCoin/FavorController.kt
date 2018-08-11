@@ -1,7 +1,6 @@
 package com.seongenie.handycoin.controller.favorCoin
 
-import com.seongenie.handycoin.domain.BasicCoin
-import com.seongenie.handycoin.domain.BasicCoinRepository
+import com.seongenie.handycoin.domain.BaseCoin
 import com.seongenie.handycoin.service.CoinPriceService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.PathVariable
@@ -19,12 +18,12 @@ class FavorCntroller {
 
     @RequestMapping(value = "/get/{exchange}/{coin}/{currency}", method = [RequestMethod.GET])
     fun getFavorCoins(@PathVariable("exchange") exchange : String, @PathVariable("coin") coin : String, @PathVariable("currency") currency : String) : FavorCoinView? {
-        var coin = BasicCoin(exchange, coin)
+        var coin = BaseCoin(exchange, coin, currency)
         return coinPriceService.getCoinPrice(coin, currency)
     }
 
     @RequestMapping(value = "/getList", method = [RequestMethod.GET])
     fun getFavorCoins() : List<FavorCoinView>{
-        return coinPriceService.getBasicCoinList()
+        return coinPriceService.getBaseCoinList()
     }
 }

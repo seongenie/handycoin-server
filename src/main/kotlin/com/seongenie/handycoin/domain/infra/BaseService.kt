@@ -1,8 +1,8 @@
 package com.seongenie.handycoin.domain.infra
 
 import org.springframework.stereotype.Service
-import javax.transaction.Transactional
+import org.springframework.transaction.annotation.Transactional
 
 @Transactional
-interface BasicService {
+class BaseService {
 }

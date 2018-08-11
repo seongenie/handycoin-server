@@ -9,7 +9,7 @@ import javax.persistence.*
 import javax.validation.constraints.NotNull
 
 @MappedSuperclass
-abstract class BasicEntity {
+abstract class BaseEntity {
 
     @Id
     @GeneratedValue

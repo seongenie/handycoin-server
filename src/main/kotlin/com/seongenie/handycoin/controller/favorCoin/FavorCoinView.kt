@@ -1,5 +1,5 @@
 package com.seongenie.handycoin.controller.favorCoin
 
-import com.seongenie.handycoin.domain.CoinPrice
+import com.seongenie.handycoin.domain.CoinTicker
 
-data class FavorCoinView (var coinPrice : CoinPrice)
+data class FavorCoinView (var coinTicker: CoinTicker)
