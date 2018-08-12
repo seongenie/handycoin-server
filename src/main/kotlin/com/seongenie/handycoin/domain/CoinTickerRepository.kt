@@ -7,14 +7,13 @@ import javax.persistence.TypedQuery
 import javax.persistence.criteria.*
 
 @Repository
-class CoinPriceRepository : BaseRepository() {
+class CoinTickerRepository : BaseRepository() {
 
     @Autowired
     lateinit var baseCoinRepository : BaseCoinRepository
 
-    fun findCoinPrices(baseCoinList: List<BaseCoin>) : List<CoinTicker> {
+    fun findCoinTickers(baseCoinList: List<BaseCoin>) : List<CoinTicker> {
         var coinId : List<Long?> = baseCoinList.map{it -> baseCoinRepository.findBaseCoin(it)!!.id}
-        var builder = getCriteria()
         var query : CriteriaQuery<CoinTicker> = builder.createQuery(CoinTicker::class.java)
         var root : Root<CoinTicker> = query.from(CoinTicker::class.java)
         var exp : Expression<String> = root.get("coin_id")
@@ -22,8 +21,7 @@ class CoinPriceRepository : BaseRepository() {
         return entityManager.createQuery(query.select(root).where(predicate)).resultList
     }
 
-    fun findCoinPrice(coinTicker: CoinTicker) : CoinTicker? {
-        var builder = getCriteria()
+    fun findCoinTicker(coinTicker: CoinTicker) : CoinTicker? {
         var query : CriteriaQuery<CoinTicker> = builder.createQuery(CoinTicker::class.java)
         var root : Root<CoinTicker> = query.from(CoinTicker::class.java)
         val baseCoin = baseCoinRepository.findBaseCoin(coinTicker.coin)
@@ -34,7 +32,6 @@ class CoinPriceRepository : BaseRepository() {
     }
 
     fun findAll() : List<CoinTicker> {
-        var builder = getCriteria()
         var query : CriteriaQuery<CoinTicker> = builder.createQuery(CoinTicker::class.java)
         var root : Root<CoinTicker> = query.from(CoinTicker::class.java)
         query.select(root)
@@ -42,10 +39,7 @@ class CoinPriceRepository : BaseRepository() {
         return q.resultList
     }
 
-
-    // join 해서 가져와야함
     fun findByExchangeCoins(exchange: String, coins: List<String>) : List<CoinTicker> {
-        val builder = getCriteria()
         val query : CriteriaQuery<CoinTicker> = builder.createQuery(CoinTicker::class.java)
         val root : Root<CoinTicker> = query.from(CoinTicker::class.java)
         val join: Join<CoinTicker, BaseCoin> = root.join("coin", JoinType.INNER)

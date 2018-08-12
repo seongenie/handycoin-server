@@ -3,7 +3,7 @@ package com.seongenie.handycoin.collector.exchange.cryptopia
 import com.seongenie.handycoin.collector.infra.CollectorModule
 import com.seongenie.handycoin.controller.baseCoin.BaseCoinView
 import com.seongenie.handycoin.service.BaseCoinService
-import com.seongenie.handycoin.service.CoinPriceService
+import com.seongenie.handycoin.service.CoinTickerService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import retrofit2.Call
@@ -16,7 +16,7 @@ class Cryptopia {
     @Autowired
     lateinit var baseCoinService: BaseCoinService
     @Autowired
-    lateinit var coinPriceService: CoinPriceService
+    lateinit var coinTickerService: CoinTickerService
     var retrofit : Retrofit? = null
     var apiService : RestAPIService? = null
 
@@ -33,7 +33,7 @@ class Cryptopia {
         if(apiService == null) return
         var request : Call<ResultView<Market>> = apiService!!.getMarkets()
         request.enqueue(CollectorModule.callbackWrapper({ response ->
-            if(response?.body()?.success!!) {
+            if(response.body()?.success!!) {
                 var marketList : List<Market>? = response.body()!!.data
                 marketList?.forEach{
                     val splited = it.label.split("/")
@@ -49,16 +49,16 @@ class Cryptopia {
         }, {t->t.printStackTrace()}))
     }
 
-    fun priceProcess() {
+    fun tickerProcess() {
         if(apiService == null) return
         var request : Call<ResultView<Market>> = apiService!!.getMarkets()
         request.enqueue(CollectorModule.callbackWrapper({ response ->
-            if (response?.body()?.success!!) {
+            if (response.body()?.success!!) {
                 var marketList : List<Market>? = response.body()!!.data
                 marketList?.forEach{
                     if (it.label.split("/")[1].equals("BTC")) {
                         try {
-                            coinPriceService.insertCoinPrice(it)
+                            coinTickerService.insertCoinTicker(it)
                         } catch (e : Exception) {
                             e.printStackTrace()
                         }

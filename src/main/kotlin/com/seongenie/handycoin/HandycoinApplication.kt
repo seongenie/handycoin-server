@@ -13,5 +13,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 @EntityScan(basePackages = arrayOf("com.seongenie.handycoin.domain"))
 class HandycoinApplication
 fun main(args: Array<String>) {
-    var context : ConfigurableApplicationContext = SpringApplication.run(HandycoinApplication::class.java, *args)
+//    var context : ConfigurableApplicationContext =
+    SpringApplication.run(HandycoinApplication::class.java, *args)
 }

@@ -3,7 +3,7 @@ package com.seongenie.handycoin.collector.exchange.cryptopia
 import com.seongenie.handycoin.collector.infra.CollectorModule
 import com.seongenie.handycoin.controller.baseCoin.BaseCoinView
 import com.seongenie.handycoin.service.BaseCoinService
-import com.seongenie.handycoin.service.CoinPriceService
+import com.seongenie.handycoin.service.CoinTickerService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import retrofit2.Call
@@ -17,7 +17,7 @@ class Upbit {
     @Autowired
     lateinit var baseCoinService: BaseCoinService
     @Autowired
-    lateinit var coinPriceService: CoinPriceService
+    lateinit var coinTickerService: CoinTickerService
     var retrofit : Retrofit? = null
     var apiService : UpbitAPIService? = null
 
@@ -52,7 +52,7 @@ class Upbit {
         request.enqueue(CollectorModule.callbackWrapper({ response ->
             val ticker : List<UpbitTicker>? = response.body()
             ticker?.forEach { it ->
-                coinPriceService.updateCoinPrice(it)
+                coinTickerService.updateCoinTicker(it)
                 count++ }
             println("${count}개 업데이트")
         }, {t->t.printStackTrace()}))

@@ -9,10 +9,7 @@ open class BaseRepository {
     @PersistenceContext
     protected open lateinit var entityManager: EntityManager
 
-
-    fun getCriteria(): CriteriaBuilder {
-        return entityManager.criteriaBuilder
-    }
+    val builder: CriteriaBuilder get() = entityManager.criteriaBuilder
 
     open fun add(entity : Any?) {
         entityManager.persist(entity)

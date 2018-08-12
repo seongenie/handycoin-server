@@ -10,19 +10,19 @@ class ResultView<T> (
 
 
 class Currency (
-    Id : Int?,
-    Name : String?,
-    Symbol : String?,
-    Algorithm : String?,
-    WithdrawFee: Double?,
-    MinWithdraw : Double?,
-    MinBaseTrade : Double?,
-    IsTipEnabled: Boolean?,
-    MinTip: Double?,
-    DepositConfirmations: Int?,
-    Status: String?,
-    StatusMessage: String?,
-    ListingStatus: String?
+//    Id : Int?,
+//    Name : String?,
+//    Symbol : String?,
+//    Algorithm : String?,
+//    WithdrawFee: Double?,
+//    MinWithdraw : Double?,
+//    MinBaseTrade : Double?,
+//    IsTipEnabled: Boolean?,
+//    MinTip: Double?,
+//    DepositConfirmations: Int?,
+//    Status: String?,
+//    StatusMessage: String?,
+//    ListingStatus: String?
 )
 
 class Market (

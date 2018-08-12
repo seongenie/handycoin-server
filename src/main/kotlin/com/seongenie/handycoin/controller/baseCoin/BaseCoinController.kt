@@ -20,22 +20,22 @@ class BaseCoinController {
     @Autowired
     lateinit var upbit: Upbit
 
-    @RequestMapping(value = "/getBaseCoins", method = [RequestMethod.GET])
+    @RequestMapping(value = ["/getBaseCoins"], method = [RequestMethod.GET])
     fun getBaseCoinList() : ExchangeCoinResponse {
         return baseCoinService.getBaseCoinList()
     }
 
-    @RequestMapping(value = "/getCoins/{exchange}", method = [RequestMethod.GET])
+    @RequestMapping(value = ["/getCoins/{exchange}"], method = [RequestMethod.GET])
     fun getCoins(@PathVariable("exchange") exchange : String) : List<String> {
         return baseCoinService.getBaseCoins(exchange).map{it -> it.coin}
     }
 
-    @RequestMapping(value = "/getExchanges/{coin}", method = [RequestMethod.GET])
+    @RequestMapping(value = ["/getExchanges/{coin}"], method = [RequestMethod.GET])
     fun getExchanges(@PathVariable("coin") coin : String) : List<String> {
         return baseCoinService.getBaseExchanges(coin).map{it -> it.exchange}
     }
 
-    @RequestMapping(value = "/upbit/ticker/collect", method = [RequestMethod.GET])
+    @RequestMapping(value = ["/upbit/ticker/collect"], method = [RequestMethod.GET])
     fun collectUpbitTicker() {
         upbit.buildApiService().apply {
             val baseCoinList : List<BaseCoin> = baseCoinService.getBaseCoins("UPBIT")

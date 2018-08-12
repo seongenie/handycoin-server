@@ -2,7 +2,7 @@ package com.seongenie.handycoin.controller.favorCoin
 
 import com.seongenie.handycoin.domain.BaseCoin
 import com.seongenie.handycoin.domain.CoinTicker
-import com.seongenie.handycoin.service.CoinPriceService
+import com.seongenie.handycoin.service.CoinTickerService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
@@ -12,19 +12,19 @@ import org.springframework.web.bind.annotation.*
 class FavorCntroller {
 
     @Autowired
-    lateinit var coinPriceService : CoinPriceService
+    lateinit var coinTickerService : CoinTickerService
 
-    @RequestMapping(value = "/get/{exchange}/{coin}/{currency}", method = [RequestMethod.GET])
+    @RequestMapping(value = ["/get/{exchange}/{coin}/{currency}"], method = [RequestMethod.GET])
     fun getFavorCoins(@PathVariable("exchange") exchange : String, @PathVariable("coin") coin : String, @PathVariable("currency") currency : String) : FavorCoinView? {
-        var coin = BaseCoin(exchange, coin, currency)
-        return coinPriceService.getCoinPrice(coin, currency)
+        var baseCoin = BaseCoin(exchange, coin, currency)
+        return coinTickerService.getCoinTicker(baseCoin, currency)
     }
 
 
-    @RequestMapping(value = "/getList", method = [RequestMethod.GET])
+    @RequestMapping(value = ["/getList"], method = [RequestMethod.GET])
     fun getFavorCoins(@RequestParam("favor") favorMap : Map<String, List<String>>) : List<CoinTicker>{
 //        val map = HashMap<String, List<String>>()
 //        map.put("UPBIT", listOf("BTC", "ETH"))
-        return coinPriceService.getFavors(favorMap)
+        return coinTickerService.getFavors(favorMap)
     }
 }

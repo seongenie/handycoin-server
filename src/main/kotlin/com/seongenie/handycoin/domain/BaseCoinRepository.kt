@@ -12,7 +12,6 @@ import com.seongenie.handycoin.domain.infra.BaseRepository
 class BaseCoinRepository : BaseRepository() {
 
     fun findBaseCoin(baseCoin : BaseCoin) : BaseCoin? {
-        var builder = getCriteria()
         var query : CriteriaQuery<BaseCoin> = builder.createQuery(BaseCoin::class.java)
         var root : Root<BaseCoin> = query.from(BaseCoin::class.java)
         var predicate : Predicate = builder.and(builder.equal(root.get<String>("exchange"), baseCoin.exchange), builder.equal(root.get<String>("coin"), baseCoin.coin))
@@ -26,7 +25,6 @@ class BaseCoinRepository : BaseRepository() {
     }
 
     fun findAll() : List<BaseCoin> {
-        var builder = getCriteria()
         var query : CriteriaQuery<BaseCoin> = builder.createQuery(BaseCoin::class.java)
         var root : Root<BaseCoin> = query.from(BaseCoin::class.java)
         query.select(root)
@@ -35,7 +33,6 @@ class BaseCoinRepository : BaseRepository() {
     }
 
     fun findCoins(exchange: String) : List<BaseCoin> {
-        var builder = getCriteria()
         var query : CriteriaQuery<BaseCoin> = builder.createQuery(BaseCoin::class.java)
         var root : Root<BaseCoin> = query.from(BaseCoin::class.java)
         var predicate : Predicate = builder.equal(root.get<String>("exchange"), exchange)
@@ -45,7 +42,6 @@ class BaseCoinRepository : BaseRepository() {
     }
 
     fun findExchanges(coin : String) : List<BaseCoin> {
-        var builder = getCriteria()
         var query : CriteriaQuery<BaseCoin> = builder.createQuery(BaseCoin::class.java)
         var root : Root<BaseCoin> = query.from(BaseCoin::class.java)
         var predicate : Predicate = builder.equal(root.get<String>("coin"), coin)
