@@ -1,2 +1,2 @@
 # handycoin_server_kotlin
-> Converting ( python -> kotlin )
+> Converting ( python(django) -> kotlin(springboot) )
