@@ -1,11 +1,11 @@
-package com.seongenie.handycoin.domain
+package com.seongenie.handycoin.model
 
 import org.springframework.stereotype.Repository
 import javax.persistence.TypedQuery
 import javax.persistence.criteria.CriteriaQuery
 import javax.persistence.criteria.Predicate
 import javax.persistence.criteria.Root
-import com.seongenie.handycoin.domain.infra.BaseRepository
+import com.seongenie.handycoin.model.infra.BaseRepository
 
 
 @Repository

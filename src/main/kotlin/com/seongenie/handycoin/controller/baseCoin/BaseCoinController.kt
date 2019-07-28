@@ -1,14 +1,13 @@
 package com.seongenie.handycoin.controller.baseCoin
 
-import com.seongenie.handycoin.collector.exchange.cryptopia.Upbit
-import com.seongenie.handycoin.domain.BaseCoin
+import com.seongenie.handycoin.collector.exchange.upbit.UpbitRetrofitBuilder
+import com.seongenie.handycoin.model.BaseCoin
 import com.seongenie.handycoin.service.BaseCoinService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RestController
-import retrofit2.http.Path
 
 @RestController
 @RequestMapping("/api/v1/base")
@@ -18,7 +17,7 @@ class BaseCoinController {
     lateinit var baseCoinService: BaseCoinService
 
     @Autowired
-    lateinit var upbit: Upbit
+    lateinit var upbitRetrofitBuilder: UpbitRetrofitBuilder
 
     @RequestMapping(value = ["/getBaseCoins"], method = [RequestMethod.GET])
     fun getBaseCoinList() : ExchangeCoinResponse {
@@ -37,7 +36,7 @@ class BaseCoinController {
 
     @RequestMapping(value = ["/upbit/ticker/collect"], method = [RequestMethod.GET])
     fun collectUpbitTicker() {
-        upbit.buildApiService().apply {
+        upbitRetrofitBuilder.buildApiService().apply {
             val baseCoinList : List<BaseCoin> = baseCoinService.getBaseCoins("UPBIT")
             val builder = StringBuilder()
             baseCoinList.forEach { it ->

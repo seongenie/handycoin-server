@@ -1,6 +1,6 @@
-package com.seongenie.handycoin.domain
+package com.seongenie.handycoin.model
 
-import com.seongenie.handycoin.domain.infra.BaseRepository
+import com.seongenie.handycoin.model.infra.BaseRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 import javax.persistence.TypedQuery

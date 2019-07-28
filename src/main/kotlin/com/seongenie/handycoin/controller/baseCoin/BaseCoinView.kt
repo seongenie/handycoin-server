@@ -1,6 +1,6 @@
 package com.seongenie.handycoin.controller.baseCoin
 
-import com.seongenie.handycoin.domain.BaseCoin
+import com.seongenie.handycoin.model.BaseCoin
 import org.springframework.beans.BeanUtils
 
 class BaseCoinView {

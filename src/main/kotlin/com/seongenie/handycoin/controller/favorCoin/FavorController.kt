@@ -1,7 +1,7 @@
 package com.seongenie.handycoin.controller.favorCoin
 
-import com.seongenie.handycoin.domain.BaseCoin
-import com.seongenie.handycoin.domain.CoinTicker
+import com.seongenie.handycoin.model.BaseCoin
+import com.seongenie.handycoin.model.CoinTicker
 import com.seongenie.handycoin.service.CoinTickerService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*

@@ -2,9 +2,10 @@ package com.seongenie.handycoin.service
 
 import com.seongenie.handycoin.controller.baseCoin.BaseCoinView
 import com.seongenie.handycoin.controller.baseCoin.ExchangeCoinResponse
-import com.seongenie.handycoin.domain.BaseCoin
-import com.seongenie.handycoin.domain.BaseCoinRepository
-import com.seongenie.handycoin.domain.infra.BaseService
+import com.seongenie.handycoin.model.BaseCoin
+import com.seongenie.handycoin.model.BaseCoinRepository
+import com.seongenie.handycoin.model.infra.BaseService
+import com.seongenie.handycoin.infra.BaseException
 import org.springframework.beans.BeanUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -35,7 +36,8 @@ class BaseCoinService : BaseService() {
     }
 
     fun getBaseCoins(exchange : String) : List<BaseCoin> {
-        return repository.findCoins(exchange)
+        val baseCoins = repository.findCoins(exchange)
+        return if(baseCoins.isNotEmpty()) baseCoins else throw BaseException()
     }
 
     fun getBaseExchanges(coin : String) : List<BaseCoin> {

@@ -3,11 +3,11 @@ package com.seongenie.handycoin.service
 import com.seongenie.handycoin.collector.exchange.cryptopia.Market
 import com.seongenie.handycoin.collector.exchange.cryptopia.UpbitTicker
 import com.seongenie.handycoin.controller.favorCoin.FavorCoinView
-import com.seongenie.handycoin.domain.BaseCoin
-import com.seongenie.handycoin.domain.BaseCoinRepository
-import com.seongenie.handycoin.domain.CoinTicker
-import com.seongenie.handycoin.domain.CoinTickerRepository
-import com.seongenie.handycoin.domain.infra.BaseService
+import com.seongenie.handycoin.model.BaseCoin
+import com.seongenie.handycoin.model.BaseCoinRepository
+import com.seongenie.handycoin.model.CoinTicker
+import com.seongenie.handycoin.model.CoinTickerRepository
+import com.seongenie.handycoin.model.infra.BaseService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 

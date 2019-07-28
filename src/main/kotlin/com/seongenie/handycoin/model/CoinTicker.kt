@@ -1,6 +1,6 @@
-package com.seongenie.handycoin.domain
+package com.seongenie.handycoin.model
 
-import com.seongenie.handycoin.domain.infra.BaseEntity
+import com.seongenie.handycoin.model.infra.BaseEntity
 import javax.persistence.Entity
 import javax.persistence.ManyToOne
 import javax.persistence.Table

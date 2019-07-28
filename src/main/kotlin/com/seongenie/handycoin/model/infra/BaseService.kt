@@ -1,4 +1,4 @@
-package com.seongenie.handycoin.domain.infra
+package com.seongenie.handycoin.model.infra
 
 import org.springframework.transaction.annotation.Transactional
 
